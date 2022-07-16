@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<robot name="demo_car">
+    <!-- base footprint -->
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.12" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <!-- base link -->
+    <link name="base_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.6 0.4 0.1"/>
+            </geometry>
+            <material name="white">
+                <color rgba="1.0 1.0 1.0 0.9"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.6 0.4 0.1"/>
+            </geometry>
+            <material name="white">
+                <color rgba="1.0 1.0 1.0 0.9"/>
+            </material>
+        </collision>
+        <inertial>
+            <mass value="30"/>
+            <inertia ixx="0.925" ixy="0.0" ixz="0.0" iyy="1.3" iyz="0.0" izz="0.425"/>
+        </inertial>
+        
+    </link>
+
+    <!-- imu -->
+    <!-- imu joint -->
+    <joint name="imu_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="imu_link"/>
+        <origin xyz="0.0 0.0 0.04"/>
+    </joint>
+
+    <!-- imu link -->
+    <link name="imu_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.02 0.02 0.02"/>
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0.1 0.1 0.5"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.02 0.02 0.02"/>
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0.1 0.1 0.5"/>
+            </material>
+        </collision>
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="0.00000667" ixy="0.0" ixz="0.0" iyy="0.00000667" iyz="0.0" izz="0.00000667"/>
+        </inertial>  
+    </link>
+
+    <!-- front wheel -->
+    <!-- front left wheel joint-->
+    <joint name="front_left_wheel_joint" type="continuous">
+        <origin xyz="0.2 0.21 -0.04"/>
+        <!--rpy="0.0 1.5707 0.0"-->
+        <parent link="base_link"/>
+        <child link="front_left_wheel_link"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <!-- front left wheel link -->
+    <link name="front_left_wheel_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="1.5707 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.95"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="1.5707 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.95"/>
+            </material>
+        </collision>
+        <inertial>
+            <mass value="30"/>
+            <inertia ixx="0.05025" ixy="0.0" ixz="0.0" iyy="0.05025" iyz="0.0" izz="0.096"/>
+        </inertial>
+    </link>
+
+    <!-- front right wheel joint-->
+    <joint name="front_right_wheel_joint" type="continuous">
+        <origin xyz="0.2 -0.21 -0.04"/>
+        <parent link="base_link"/>
+        <child link="front_right_wheel_link"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <!-- front right whell link -->
+    <link name="front_right_wheel_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="1.5707 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.95"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="1.5707 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.95"/>
+            </material>
+        </collision>
+        <inertial>
+            <mass value="30"/>
+            <inertia ixx="0.05025" ixy="0.0" ixz="0.0" iyy="0.05025" iyz="0.0" izz="0.096"/>        
+        </inertial>        
+    </link>
+
+    <!-- rear wheel -->
+    <!-- rear left wheel joint -->
+    <joint name="rear_left_wheel_joint" type="continuous">
+        <origin xyz="-0.2 0.21 -0.04"/>
+        <parent link="base_link"/>
+        <child link="rear_left_wheel_link"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <!-- rear left wheel link -->
+    <link name="rear_left_wheel_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="1.5707 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.95"/>
+            </material>
+        </visual>    
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="1.5707 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.95"/>
+            </material>
+        </collision>
+        <inertial>
+            <mass value="30"/>
+            <inertia ixx="0.05025" ixy="0.0" ixz="0.0" iyy="0.05025" iyz="0.0" izz="0.096"/>        
+        </inertial>   
+    </link>
+
+    <!-- rear right wheel joint -->
+    <joint name="rear_right_wheel_joint" type="continuous">
+        <origin xyz="-0.2 -0.21 -0.04"/>
+        <parent link="base_link"/>
+        <child link="rear_right_wheel_link"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <!-- rear right wheel link -->
+    <link name="rear_right_wheel_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="1.5707 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.95"/>
+            </material>
+        </visual>   
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="1.5707 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.08" length="0.03"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 0.95"/>
+            </material>
+        </collision>
+        <inertial>
+            <mass value="30"/>
+            <inertia ixx="0.05025" ixy="0.0" ixz="0.0" iyy="0.05025" iyz="0.0" izz="0.096"/>        
+        </inertial>    
+    </link>
+
+    <!-- Set up for the colors in gazebo -->
+    <gazebo reference="base_link">
+        <material>Gazebo/White</material>
+    </gazebo>
+    <gazebo reference="front_left_wheel_link">
+        <material>Gazebo/FlatBlack</material>
+    </gazebo>
+    <gazebo reference="front_right_wheel_link">
+        <material>Gazebo/FlatBlack</material>
+    </gazebo>
+    <gazebo reference="rear_left_wheel_link">
+        <material>Gazebo/FlatBlack</material>
+    </gazebo>
+    <gazebo reference="rear_right_wheel_link">
+        <material>Gazebo/FlatBlack</material>
+    </gazebo>
+    
+    <!--Set up for gazebo -->
+    <gazebo>
+        <plugin name="diff_drive_rear" filename="libgazebo_ros_diff_drive.so">
+            <ros>
+                <namespace>/</namespace>
+                <remapping>cmd_vel:=cmd_vel</remapping>
+                <remapping>odom:=odom</remapping>
+            </ros>
+            <update_rate>30</update_rate>
+            <!-- wheels -->
+            <left_joint>rear_left_wheel_joint</left_joint>
+            <right_joint>rear_right_wheel_joint</right_joint>
+            <!-- kinematics -->
+            <wheel_separation>0.42</wheel_separation>
+            <wheel_diameter>0.16</wheel_diameter>
+            <!-- limits -->
+            <max_wheel_torque>200</max_wheel_torque>
+            <max_wheel_acceleration>100.0</max_wheel_acceleration>
+            <!-- output -->
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+        </plugin>
+        <plugin name="diff_drive_front" filename="libgazebo_ros_diff_drive.so">
+            <ros>
+                <namespace>/</namespace>
+                <remapping>cmd_vel:=cmd_vel</remapping>
+                <remapping>odom:=odom</remapping>
+            </ros>
+            <update_rate>30</update_rate>
+            <!-- wheels -->
+            <left_joint>front_left_wheel_joint</left_joint>
+            <right_joint>front_right_wheel_joint</right_joint>
+            <!-- kinematics -->
+            <wheel_separation>0.42</wheel_separation>
+            <wheel_diameter>0.16</wheel_diameter>
+            <!-- limits -->
+            <max_wheel_torque>200</max_wheel_torque>
+            <max_wheel_acceleration>100.0</max_wheel_acceleration>
+            <!-- output -->
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+        </plugin>
+    </gazebo>
+
+    <!-- IMU Sensor set up-->
+    <gazebo reference="imu_link">
+        <sensor name="imu_sensor" type="imu">
+            <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+                <ros>
+                    <namespace>/</namespace>
+                    <remapping>~/out:=imu</remapping>
+                </ros>
+                <initial_orientation_as_reference>false</initial_orientation_as_reference>
+            </plugin>
+            <always_on>true</always_on>
+            <update_rate>100</update_rate>
+            <visualize>true</visualize>
+            <imu>
+                <angular_velocity>
+                    <x>
+                        <noise type="gaussian">
+                            <mean>0.0</mean>
+                            <stddev>2e-4</stddev>
+                            <bias_mean>0.0000075</bias_mean>
+                            <bias_stddev>0.0000008</bias_stddev>
+                        </noise>
+                    </x>
+                    <y>
+                        <noise type="gaussian">
+                            <mean>0.0</mean>
+                            <stddev>2e-4</stddev>
+                            <bias_mean>0.0000075</bias_mean>
+                            <bias_stddev>0.0000008</bias_stddev>
+                        </noise>
+                    </y>
+                    <z>
+                        <noise type="gaussian">
+                            <mean>0.0</mean>
+                            <stddev>2e-4</stddev>
+                            <bias_mean>0.0000075</bias_mean>
+                            <bias_stddev>0.0000008</bias_stddev>
+                        </noise>
+                    </z>
+                </angular_velocity>
+                <linear_acceleration>
+                    <x>
+                        <noise type="gaussian">
+                            <mean>0.0</mean>
+                            <stddev>1.7e-2</stddev>
+                            <bias_mean>0.1</bias_mean>
+                            <bias_stddev>0.001</bias_stddev>
+                        </noise>
+                    </x>
+                    <y>
+                        <noise type="gaussian">
+                            <mean>0.0</mean>
+                            <stddev>1.7e-2</stddev>
+                            <bias_mean>0.1</bias_mean>
+                            <bias_stddev>0.001</bias_stddev>
+                        </noise>
+                    </y>
+                    <z>
+                        <noise type="gaussian">
+                            <mean>0.0</mean>
+                            <stddev>1.7e-2</stddev>
+                            <bias_mean>0.1</bias_mean>
+                            <bias_stddev>0.001</bias_stddev>
+                        </noise>
+                    </z>
+                </linear_acceleration>
+            </imu>
+        </sensor>
+    </gazebo>
+
+</robot>

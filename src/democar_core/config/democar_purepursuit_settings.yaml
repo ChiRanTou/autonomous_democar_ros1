@@ -1,0 +1,6 @@
+# democar settings
+pure_pursuit:
+  car_length: 0.4               # m
+  default_preview_distance: 0.5 # m
+  preview_ratio: 0.1            # 预瞄系数
+  max_steer_angle: 45.0         # degree

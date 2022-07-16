@@ -1,0 +1,25 @@
+<!--启动小车和rviz-->
+<!-- 与ros2区别：
+    ros1   ros2
+    name = name
+    pkg  = package
+    type = executable/exec
+-->
+<launch>
+    <!-- 定义小车模型路径 -->
+    <arg name="democar" default="$(find democar_description)/urdf/demo_car.urdf"/>
+
+    <!-- 把小车模型放入参数服务器中 -->
+    <param name="robot_description" textfile="$(arg democar)"/>
+    
+    <!-- 启动机器人状态发布节点-->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" args="$(arg democar)"/>
+
+    <!-- 启动关节状态发布节点可视化-->
+    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" args="$(arg democar)"/>
+
+    <!-- 启动rviz-->
+    <node pkg="rviz" type="rviz" name="rviz" args="$(find democar_description)/config/democar.rviz"/>
+
+
+</launch>

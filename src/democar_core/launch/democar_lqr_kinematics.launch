@@ -1,0 +1,5 @@
+<!-- 加载lqr算法-运动学模型 -->
+<launch>
+    <rosparam file="$(find democar_core)/config/democar_lqr_settings.yaml" command="load" />
+    <node pkg="democar_core" type="democar_lqr_kinematics_node" name="lqr_control" output="screen"/>
+</launch>
